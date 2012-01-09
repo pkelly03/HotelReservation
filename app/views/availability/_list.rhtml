@@ -1,0 +1,59 @@
+<table>
+	<tr>
+    <th>
+		<table>
+			<tr>
+				<td><%= link_to_remote 'Check All', :url => { :action => 'checkAll',  :checked => 'checkAll' } %></td>			
+			</tr>
+			<tr>
+			  	<td><%= link_to_remote 'Clear All', :url => { :action => 'clearAll' ,  :checked => 'clearAll' } %> </td>
+			</tr>
+			<tr>
+			  	<td><%= link_to_remote 'Check Weekends', :url => { :action => 'checkWeekends' ,  :checked => 'checkWeekends' } %> </td>
+			</tr>
+		</table>		
+    </th>
+	<th>Date</th>
+    <th>Single Room</th>
+    <th>Double Room</th>
+    <th>Triple Room</th>
+	<th>Twin Room</th>
+	<th>Action</th>
+  </tr>
+<% for availability in @availabilities %>
+  <tr class="even">
+
+<!-- Find out if a day is a weekday, weekend, has weekend rates attached etc. -->
+<!-- Call out to helper methods -->
+<% 
+		
+		weekendAvailabilitySelected = checkIfWeekendRate(availability.booking_info.rate_special_id) 
+		weekendDay = checkWeekendDay(availability.booking_info.weekend)
+		checked = getCheckedStatus(weekendAvailabilitySelected, weekendDay)
+%>
+<%= h weekendAvailabilitySelected %>
+    <% if weekendAvailabilitySelected == false && weekendDay == true %> 
+     	<td>N/A</td> 
+		<td>N/A</td> 
+    	<td>N/A</td>
+    	<td>N/A</td>
+    	<td>N/A</td>		
+    	<td>N/A</td>
+  	<% else %>
+		<% if checked == true %>
+			 <td><%= check_box_tag 'room_availability[availability_ids][]', availability.id, checked=true %></td>
+	    <% else %>
+		     <td><%= check_box_tag 'room_availability[availability_ids][]', availability.id, checked=false %></td>
+	    <% end %>
+		<td><%= availability.booking_info.date %></td>
+		<td><%= availability.single_room %></td>
+     	<td><%= availability.double_room %></td>
+    	<td><%= availability.triple_room %></td>
+		<td><%= availability.twin_room %></td>		
+		<td><%= link_to 'Edit', :action => 'edit', :id => availability %></td>
+	<% end %>
+  </tr>
+  <% end %>
+</table>
+
+

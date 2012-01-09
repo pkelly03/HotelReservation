@@ -1,0 +1,27 @@
+<h1>Listing bookings</h1>
+
+<table>
+  <tr>
+  <% for column in Booking.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for booking in @bookings %>
+  <tr>
+  <% for column in Booking.content_columns %>
+    <td><%=h booking.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => booking %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => booking %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => booking }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @booking_pages.current.previous } if @booking_pages.current.previous %>
+<%= link_to 'Next page', { :page => @booking_pages.current.next } if @booking_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New booking', :action => 'new' %>

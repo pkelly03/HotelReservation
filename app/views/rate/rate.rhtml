@@ -1,0 +1,192 @@
+<% form_remote_tag :action => 'rate', :html => {:id => 'rate_form' }, :id => 'rate_form', :method => 'get' do %>
+
+<div class="subform">
+  <h3>Select Rates:</h3>
+   <% remote_form_for :rate, :url => { :action => "set_rate" } do |f| %>
+   <label for="rate_id">
+    <span>Set Flight Rates</span>
+   
+         
+            <% @rate_specials = RateSpecial.find(:all) %>
+			 <%= f.collection_select(:id, @rate_specials, :id, :shortname, {:selected_value => session[:currentRateId]})  %>
+		
+			
+	</label>
+   <div class="submit">
+   	<%= submit_tag "Submit Rate" %> 
+	</div>
+	<% end %>
+</div>
+
+<div class="subform">
+	<h3>Flight:</h3>
+<label for="date_range">
+		<span>Specify Flight Range : </span>
+			<div class="formgroupings" id="date_range_from">
+					<%= date_select('date_range', 'from_date', :order => [:day, :month, :year])%>
+			</div>	
+			<div class="formgroupings" id="date_range_to">
+					<%= date_select('date_range', 'to_date', :order => [:day, :month, :year])%>	
+			</div>			
+	</label>			
+		<div class="submit">
+		<%= submit_tag 'Search', :name => nil %>
+		</div>
+	
+</div>
+
+
+<div class="subform">
+		<h3>Set rates for checked days:</h3>
+ 		<label for="roomRateDoubleRoom"><%= text_field_tag :roomRateDoubleRoom, params[:roomRateDoubleRoom], "size" => 3 %><span>Double Room</span></label>	
+ 		<label for="roomRateSingleRoom"><%= text_field_tag :roomRateSingleRoom, params[:roomRateSingleRoom], "size" => 3 %><span>Single Room</span></label>	
+ 		<label for="roomRateTwinRoom"><%= text_field_tag :roomRateTwinRoom, params[:roomRateTwinRoom], "size" => 3 %><span>Twin Room</span></label>	
+		<label for="roomRateTripleRoom"><%= text_field_tag :roomRateTripleRoom, params[:roomRateTripleRoom], "size" => 3 %><span>Triple Room</span></label>										
+		<div class="submit"> <%= submit_to_remote 'button', 'Update Rate', :url => { :action => 'updateRate' } %></div>
+ 	</tr>	
+</div>
+<% end %>
+
+
+<div id="show_results">
+ <%= render :partial => 'list' %>
+</div>
+<script type="text/javascript">
+	
+		YAHOO.namespace("ripleycourt.yui.calendar");
+		
+		YAHOO.ripleycourt.yui.calendar.init = function() {
+			
+			
+			
+			var date_range_from  = document.getElementById('date_range_from');
+			var date_range_to  = document.getElementById('date_range_to');
+			
+			
+			
+			var fromDateCal = document.createElement('div');
+			fromDateCal.setAttribute('id','fromDateCal');
+			var toDateCal = document.createElement('div');
+			toDateCal.setAttribute('id','toDateCal');
+			var fromDateCalContainer = document.createElement('div');
+			fromDateCalContainer.setAttribute('id','fromDateCalContainer');
+			var toDateCalContainer = document.createElement('div');
+			toDateCalContainer.setAttribute('id','toDateCalContainer');
+			
+			var fromDateCalInserted = date_range_from.appendChild(fromDateCal);
+			var toDateCalInserted = date_range_to.appendChild(toDateCal);
+			var fromDateCalContainerInserted = date_range_from.appendChild(fromDateCalContainer);
+			var toDateCalContainerInserted = date_range_to.appendChild(toDateCalContainer);
+			
+			YAHOO.ripleycourt.yui.calendar.fromDateYUICal = new YAHOO.widget.Calendar("usr_req_startdatecal",'fromDateCalContainer',{mindate:"1/1/2003", maxdate:"12/31/2013", title:"Start Date", close:true});
+			YAHOO.ripleycourt.yui.calendar.fromDateYUICal.render();
+			
+			YAHOO.ripleycourt.yui.calendar.toDateYUICal = new YAHOO.widget.Calendar("usr_req_enddatecal",'toDateCalContainer',{mindate:"1/1/2003", maxdate:"12/31/2013", title:"End Date", close:true});
+			YAHOO.ripleycourt.yui.calendar.toDateYUICal.render();			
+
+			YAHOO.util.Event.addListener("fromDateCal", "click", YAHOO.ripleycourt.yui.calendar.fromDateYUICal.show, YAHOO.ripleycourt.yui.calendar.fromDateYUICal, true); 
+			YAHOO.util.Event.addListener("toDateCal", "click", YAHOO.ripleycourt.yui.calendar.toDateYUICal.show, YAHOO.ripleycourt.yui.calendar.toDateYUICal, true); 
+
+			function handleSelectFrom(type,args,obj) {
+				var dates = args[0];
+				var date = dates[0];
+				var year = date[0], month = date[1], day = date[2];
+		
+				var date_range_from_date_3i  = document.getElementById('date_range_from_date_3i');
+				for(var i=0; i<date_range_from_date_3i.length; i++)
+				{
+					
+					if(date_range_from_date_3i.options[i].value==day)
+					{						
+						date_range_from_date_3i.selectedindex=i;
+						date_range_from_date_3i.options[i].selected=true;						
+						
+					}
+					else{date_range_from_date_3i.options[i].selected=false;}
+				}
+				var date_range_from_date_2i  = document.getElementById('date_range_from_date_2i');
+				for(var i=0; i<date_range_from_date_2i.length; i++)
+				{
+					
+					if(date_range_from_date_2i.options[i].value==month)
+					{						
+						date_range_from_date_2i.selectedindex=i;
+						date_range_from_date_2i.options[i].selected=true;						
+						
+					}
+					else{date_range_from_date_2i.options[i].selected=false;}
+				}
+				var date_range_from_date_1i  = document.getElementById('date_range_from_date_1i');
+				for(var i=0; i<date_range_from_date_1i.length; i++)
+				{
+					
+					if(date_range_from_date_1i.options[i].value==year)
+					{						
+						date_range_from_date_1i.selectedindex=i;
+						date_range_from_date_1i.options[i].selected=true;						
+						
+					}
+					else{date_range_from_date_1i.options[i].selected=false;}
+				}
+			
+			
+			
+				
+			}
+			
+			function handleSelectTo(type,args,obj) {
+				var dates = args[0];
+				var date = dates[0];
+				var year = date[0], month = date[1], day = date[2];
+				console.log(dates);
+				var date_range_to_date_3i  = document.getElementById('date_range_to_date_3i');
+				for(var i=0; i<date_range_to_date_3i.length; i++)
+				{
+					
+					if(date_range_to_date_3i.options[i].value==day)
+					{						
+						date_range_to_date_3i.selectedindex=i;
+						date_range_to_date_3i.options[i].selected=true;						
+						
+					}
+					else{date_range_to_date_3i.options[i].selected=false;}
+				}
+				
+				var date_range_to_date_2i  = document.getElementById('date_range_to_date_2i');
+				for(var i=0; i<date_range_to_date_2i.length; i++)
+				{
+					if(date_range_to_date_2i.options[i].value==month)
+					{
+						date_range_to_date_2i.selectedindex=i;
+						date_range_to_date_2i.options[i].selected=true;						
+						
+					}
+					else{date_range_to_date_2i.options[i].selected=false;}
+				}
+				var date_range_to_date_1i  = document.getElementById('date_range_to_date_1i');
+				for(var i=0; i<date_range_to_date_1i.length; i++)
+				{
+					if(date_range_to_date_1i.options[i].value==year)
+					{
+						date_range_to_date_1i.selectedindex=i;
+						date_range_to_date_1i.options[i].selected=true;						
+						
+					}
+					else{date_range_to_date_1i.options[i].selected=false;}
+				}
+			
+			
+			}
+	
+			YAHOO.ripleycourt.yui.calendar.fromDateYUICal.selectEvent.subscribe(handleSelectFrom, YAHOO.ripleycourt.yui.calendar.usr_req_startdatecal, true);
+			YAHOO.ripleycourt.yui.calendar.toDateYUICal.selectEvent.subscribe(handleSelectTo, YAHOO.ripleycourt.yui.calendar.usr_req_enddatecal, true);
+			
+		
+		}
+
+		YAHOO.util.Event.onDOMReady(YAHOO.ripleycourt.yui.calendar.init);
+
+		
+</script>
+
+

@@ -1,0 +1,64 @@
+<table class="ratelist">
+	<thead>
+	<tr>
+    <th>
+		<ul>
+			<li>
+			<%= link_to_remote 'Check All', :url => { :action => 'checkAll',  :checked => 'checkAll' } %>		
+			</li>
+			<li>
+			<%= link_to_remote 'Clear All', :url => { :action => 'clearAll' ,  :checked => 'clearAll' } %>
+			</li>
+			<li>
+			<%= link_to_remote 'Check Weekends', :url => { :action => 'checkWeekends' ,  :checked => 'checkWeekends' } %>
+			</li>
+			</ul>	
+    </th>
+	<th>Date</th>
+    <th>Single Room</th>
+    <th>Double Room</th>
+    <th>Triple Room</th>
+	<th>Twin Room</th>
+	<th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+<% row_class = cycle("even", "odd") %>
+<% for rate in @rates %>
+  <tr class="<%= row_class %>">
+
+<!-- Find out if a day is a weekday, weekend, has weekend rates attached etc. -->
+<!-- Call out to helper methods -->
+<% 
+	
+		weekendRateSelected = checkIfWeekendRate(rate.rate_special_id) 
+		weekendDay = checkWeekendDay(rate.weekend)
+		checked = getCheckedStatus(weekendRateSelected, weekendDay)
+%>
+
+    <% if weekendRateSelected == false && weekendDay == true %> 
+     	<td>N/A</td> 
+		<td>N/A</td> 
+    	<td>N/A</td>
+    	<td>N/A</td>
+    	<td>N/A</td>		
+    	<td>N/A</td>
+  	<% else %>
+		<% if checked == true %>
+			 <td><%= check_box_tag 'room_rate[rate_ids][]', rate.id, checked=true %></td>
+	    <% else %>
+		     <td><%= check_box_tag 'room_rate[rate_ids][]', rate.id, checked=false %></td>
+	    <% end %>
+		<td><%= rate.date %></td>
+		<td><%= rate.single_room %></td>
+     	<td><%= rate.double_room %></td>
+    	<td><%= rate.triple_room %></td>
+		<td><%= rate.twin_room %></td>		
+		<td><%= link_to 'Edit', :action => 'edit', :id => rate %></td>
+	<% end %>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+
+

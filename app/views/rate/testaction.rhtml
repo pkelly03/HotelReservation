@@ -1,0 +1,33 @@
+<%= link_to_remote "Check Time", 
+	:update => 'current_time', 
+	:url => { :action => 'get_time' },
+    :before => "$('current_time').update('Loading..')",
+	:success => "$('current_time').visualEffect('highlight')",
+	:failure => "alert('there was an error')",
+	:complete => "$('indicator').hide()" %>
+	
+<span id="indicator" style="display: none;"> Loading..</span>
+<div id="current_time"></div>
+
+<div id="fakeform">
+	<input type="text" name="foo" value="bar" />	
+</div>
+
+<%= link_to_remote "Submit fake form..",
+	:submit => "fakeform",
+	:url => {:action=> 'repeat'},
+	:complete => "alert(request.responseText)"
+%>
+
+<%= link_to_function "Toggle DIV", "$('indicator').toggle()" %>
+
+<%= form_tag :action => 'reverse' %>
+
+	<p>Text to reverse: <%= text_field_tag 'text_to_reverse' %></p>
+	<p id="reversed"> </p>
+	<p><%= submit_to_remote 'submit', 'Submit via Ajax', :update => 'reversed', :url => {:action => 'reverse'} %></p>
+<%= end_form_tag%>
+
+<p>Text to reverse: <%= text_field_tag 'text_to_reverse' %></p>
+<span id="reversed"> </span></p>
+<%= observe_field 'text_to_reverse', :update => 'reversed', :url => {:action => 'reverse' }, :with =>'text_to_reverse' %>

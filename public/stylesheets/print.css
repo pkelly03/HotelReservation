@@ -1,0 +1,77 @@
+/* PRINT.CSS
+   Styles for print media
+   
+   --------------------------------------------------------------------------------------------------------------------------
+   FILE INFO
+   Revision number:  1.0
+   Last updated:     2006/07/05
+   Last updated by:  Matt Wilcox
+                     matt@karova.com
+
+   ----------------------------------------------------------------------------------------------------------------------- */
+
+/* =global_reset */
+   *                                     { margin: 0; padding: 0; }
+   ul, dl, ol                            { list-style-position: inside; }
+   ul ul, ul ol, ul dir, ul menu, ul dl,
+   ol ul, ol ol, ol dir, ol menu, ol dl,
+   dir ul, dir ol, dir dir, dir menu, 
+   dir dl, menu ul, menu ol, menu dir,
+   menu menu, menu dl, dl ul, dl ol,
+   dl dir, dl menu, dl dl                { margin-top: 0; margin-bottom: 0; }
+   p, ul, ol, dl, dd, blockquote, form   { margin-bottom: 1em; }
+
+/* =html =body */
+   html { font: 12pt/16pt Georgia, "Times New Roman", serif; color: #000; background-color: #fff;}
+   body { width : 100%; }
+   
+/* =hx */
+   h1, h2, h3, h4, h5, h6 { margin-bottom : 1em; line-height : 1.3em; color : #666; }
+
+/* =h1 */
+   h1 { font-size : 24pt; }
+
+/* =h2 */
+   h2 { font-size : 20pt; }
+
+/* =h3 */
+   h3 { font-size : 18pt; }
+
+/* =h4 */
+   h4 { font-size : 16pt; }
+
+/* =h5 */
+   h5 { font-size : 14pt; }
+
+/* =h6 */
+   h6 { font-size : 12pt; }
+   
+/* =p */
+   p.accessibility { display : none; }
+
+/* =em =strong =del =ins =abbr =acronym */
+   em       { font-style : normal; border-bottom : 1px solid; }
+   strong   { font-weight : bold; background : #000; color : #fff; }
+   del      { text-decoration : line-through; }
+   ins      { text-decoration : none; color : #009; font-family : Georgia; }
+   abbr,
+   acronym  { border-bottom : .12em dotted #000; }
+   abbr:after,
+   acronym:after { content : " [ ABBREVIATION: " attr(title) " ] "; text-decoration : none; border-width : 0; font-size : 10pt; color : #aaa; }
+   
+/* =a */
+   a:after { content : " [ URL: " attr(href) " ] "; text-decoration : none; border-width : 0; font-size : 10pt; color : #00f; }
+
+/* =dl */
+
+/* =dt */
+
+/* =dd */
+
+/* =form */
+   form { display : none; }
+
+/* =img */
+   
+/* =div */
+   #nav_main { display : none; }

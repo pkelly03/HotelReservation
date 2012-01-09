@@ -1,0 +1,21 @@
+<h1>New booking</h1>
+
+<% form_tag :action => 'create' do %>
+<p><label for="booking_arrival_date">Arrival date</label><br/>
+<%= date_select 'booking', 'arrival_date'  %></p>
+
+<p><label for="booking_departure_date">Departure date</label><br/>
+<%= date_select 'booking', 'departure_date'  %></p>
+
+<p><label for="room_type">Amount</label><br/>
+<% @rooms = Room.find(:all) %>
+Room Size : 
+<%= @rooms.size %>
+<%= collection_select(:id, @rooms, :id, :room, {:selected_value => session[:currentRoomId]})  %>
+
+<p><label for="booking_amount">Amount</label><br/>
+<%= text_field 'booking', 'amount'  %></p>
+  <%= submit_tag "Create" %>
+<% end %>
+
+<%= link_to 'Back', :action => 'list' %>

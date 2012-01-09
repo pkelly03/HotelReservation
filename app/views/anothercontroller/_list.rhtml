@@ -1,0 +1,97 @@
+
+<script language="JavaScript">
+
+// javascript
+function doCheckOn() 
+{
+  var i, collection;
+  collection = document.getElementsByName("room_rate[rate_ids][]");
+  collection1 = document.getElementsByName("uncheck_all");
+  for (i = 0; i < collection.length; i++) 
+  {
+    collection[i].checked = true;
+  }
+  for (i = 0; i < collection1.length; i++) 
+  {
+    collection1[i].checked = false;
+  }
+
+}
+
+
+function doCheckOff() 
+{
+  var i, collection;
+  collection = document.getElementsByName("room_rate[rate_ids][]");
+  collection1 = document.getElementsByName("check_all");
+  for (i = 0; i < collection.length; i++) 
+  {
+    collection[i].checked = false;
+  }
+  for (i = 0; i < collection1.length; i++) 
+  {
+     collection1[i].checked = false;
+  }
+
+}
+
+</script>
+
+
+<% form_tag :html => {:id => 'rate_form' }, :action => 'updateRate', :method => 'post' do %>
+<%= hidden_field_tag 'fromDate', :value=>@fromDate %>
+<%= hidden_field_tag 'toDate', :value=>'aa' %>
+<table>
+ 	<tr>
+		<th>Set rates for checked days:</th>
+ 		<th><%= text_field_tag :roomRate, params[:roomRate], "size" => 3 %> per room</th>
+		<th><div class="submit"><%= submit_tag 'Update Rate', :name => nil  %></div></th>
+ 	</tr>	
+</table>
+
+
+<table>
+  <tr>
+    <th>
+		<table>
+			<tr>
+				<td><input id="check_all" name="check_all" type="checkbox" onclick="doCheckOn();" />Select All</td>			
+			</tr>
+			<tr>
+			  	<td><input id="uncheck_all" name="uncheck_all" type="checkbox" onclick="doCheckOff();" />Clear All</td>
+			</tr>
+			<tr>
+			  	<td><input id="check_weekends" name="uncheck_all" type="checkbox" onclick="doCheckWeekends();" />Check Weekends</td>
+			</tr>
+			<tr>
+			  	<td><input id="uncheck_weekends" name="uncheck_all" type="checkbox" onclick="doCheckOffWeekends();" />Uncheck Weekends</td>
+			</tr>
+		</table>		
+    </th>
+	<th>Date</th>
+    <th>Rate</th>
+	<th>Action</th>
+  </tr>
+
+<% for test1 in @testmodels %>
+  <tr class="even">
+ <% weekendRate = false %>
+ <% if test1.weekend? %>
+       <% if test1.rate_id == 1 %>
+	     <% weekendRate = true %>
+	   <% end %>
+<% end %>
+    <% if weekendRate %> 
+     	<td>N/A</td> 
+		<td>N/A</td> 
+    	<td>N/A</td>
+  	<% else %>
+	    <td><%= check_box_tag 'room_rate[rate_ids][]', test1.id, checked=false %></td>
+		<td><%= test1.date %></td>
+		<td><%= test1.amount %></td>
+		<td><%= link_to 'Edit', :action => 'edit', :id => test1 %></td>
+	<% end %>
+  </tr>
+  <% end %>
+</table>
+<% end %>

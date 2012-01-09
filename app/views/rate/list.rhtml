@@ -1,0 +1,23 @@
+<h1>Listing Rates</h1>
+<table>
+  <tr>
+  <% for column in Rate.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+
+<% for rate in @rates %>
+  <tr>
+  <% for column in Rate.content_columns %>
+    <td><%=h rate.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => rate %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => rate %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => rate }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+<%= link_to 'Previous page', { :page => @rate_pages.current.previous } if @rate_pages.current.previous %>
+<%= link_to 'Next page', { :page => @rate_pages.current.next } if @rate_pages.current.next %>
+<br />
+<%= link_to 'New Rate', :action => 'new' %>

@@ -1,0 +1,15 @@
+<form id="my_form" action="replace">
+<h1>Filter recipients</h1>
+<p>Select the contacts you'd like to publish to and press publish when ready...</p>
+<h3>User Type</h3>  
+<table><tr><td colspan="3">
+<input type="checkbox" name="types[]" class="check" value="All" onClick="$$('#my_form input.check').each(function(box){box.checked=true})">All
+<input type="checkbox" name="types[]" class="check" value="First&Third" onClick="$$('#my_form input.check').each(function(box){box.checked=true})">All
+ </td></tr><tr>
+<div id="change">
+<% for record in @records %>
+<td><input type="checkbox" class="check" name="types[]" value="record.id" /><label for="filter_types"><%= record.date %></td>
+</tr><tr>
+</div>
+<% end %>
+

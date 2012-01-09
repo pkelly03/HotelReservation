@@ -1,0 +1,29 @@
+<% form_remote_tag :html => {:id => 'rate_form' } , :method => 'post' do %>
+
+<table>
+  <tr>
+    <th>
+		<table>
+			<tr>
+				<input id="check_all" checked="false" name="check_all" type="checkbox" onclick="Form.getInputs('rate_form', 'checkbox').each(function(box){box.checked = true;uncheck_all.checked=false})" />All
+			</tr>
+			<tr>
+				<input id="uncheck_all" name="uncheck_all" type="checkbox" onclick="Form.getInputs('rate_form', 'checkbox').each(function(box){box.checked = false;uncheck_all.checked=true})" />
+			</tr>
+		</table>		
+    </th>
+  </tr>
+
+  <% for test1 in @models %>
+  
+  <tr>
+  <!-- <% form_for test1, :id => test1, :url => { :action => "updateRate", :id => test1 } do %>  -->
+	<!-- rate[rate_ids][] forces the view to send the list of checked boxes -->
+	<td><%= check_box_tag 'rate[rate_ids][]', test1.id, checked=false, :class=>'click' %></td>
+   <!--   <% end %> -->
+  </tr>
+   <% end %>
+</table>
+
+
+<% end %>

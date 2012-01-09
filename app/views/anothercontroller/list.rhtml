@@ -1,0 +1,23 @@
+<h1>Listing another_models</h1>
+<table>
+  <tr>
+  <% for column in AnotherModel.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+
+<% for another_model in @another_models %>
+  <tr>
+  <% for column in AnotherModel.content_columns %>
+    <td><%=h another_model.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => another_model %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => another_model %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => another_model }, :confirm => 'Are you sure?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+<%= link_to 'Previous page', { :page => @another_model_pages.current.previous } if @another_model_pages.current.previous %>
+<%= link_to 'Next page', { :page => @another_model_pages.current.next } if @another_model_pages.current.next %>
+<br />
+<%= link_to 'New another_model', :action => 'new' %>

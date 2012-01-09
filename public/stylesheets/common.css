@@ -1,0 +1,39 @@
+*{margin: 0; padding: 0; background: #FFF;}
+
+body{
+	margin: 0 3em;
+	padding: 2em 0;
+	border-left: 1px solid #aaa;
+	border-right: 1px solid #aaa;
+	font-family: "Century Gothic", sans-serif;
+}
+#content{min-height: 30em;}
+form{margin: 1em 0;}
+fieldset{padding: 1em;}
+#mainnavigation{  list-style-type: none; text-align: center; width: 100%;}
+#mainnavigation li.availibility{width: 20%;}
+#mainnavigation li{display: block; float: left; width: 20%}
+.submit{padding: 1em 0;}
+.submit input{padding: 0.2em 2em; background: transparent; }
+input{background: #fff; border: 1px solid #aaa; padding: 0.2em;}
+label span{width: 10%;display: block; float: left;}
+label input{width: 30%; float: left;}
+label{clear: both; display: block; padding: 0.3em 0;}
+#mainnavigation li a{background: #fff; display: block; border-top: 1px solid #aaa;border-bottom: 1px solid #aaa; padding: 0.3em 0; text-decoration: none; color: #333;}
+#mainnavigation li a:hover{background: #bbb;}
+#footer{ text-align: center;}
+#maincontent{ padding: 3em; clear: both;}
+#availibilityListing{width: 100%; border: 1px solid #aaa; border-collapse:collapse;}
+th,td{border: 1px solid #aaa; padding: 0.2em;}
+#availibilityListing thead th,#availibilityListing tfoot td{ background: #bbb;}
+#availibilityListing tfoot{ text-align: center; font-weight: bold;}
+#availibilityListing tr.even td{ background: #fff;}
+#availibilityListing tbody tr:hover td{ background: #ddd;}
+caption{padding: 0 0 1em 0;}
+#notice {
+border: 2px solid red;
+padding: 1em;
+margin-bottom: 2em;
+background-color: #f0f0f0 ;
+font: bold smaller sans-serif;
+}

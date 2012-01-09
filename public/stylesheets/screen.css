@@ -1,0 +1,66 @@
+/* SCREEN.CSS
+   This is where all styles for on-screen media are declaired
+
+   ----------------------------------------------------------------------------------------------------------------------- */
+
+@media all { /* all contained styles hidden from IE Mac */
+
+/* =global_reset */
+   *                                     { margin: 0; padding: 0; }
+   ul, dl, ol                            { list-style-position: inside; }
+   ul ul, ul ol, ul dir, ul menu, ul dl,
+   ol ul, ol ol, ol dir, ol menu, ol dl,
+   dir ul, dir ol, dir dir, dir menu, 
+   dir dl, menu ul, menu ol, menu dir,
+   menu menu, menu dl, dl ul, dl ol,
+   dl dir, dl menu, dl dl                { margin-top: 0; margin-bottom: 0; }
+   p, ul, ol, dl, dd, blockquote, form   { margin-bottom: 1em; }
+
+/* =html =body */
+  *{margin: 0; padding: 0; }
+
+body{
+	/*margin: 0 3em;
+	padding: 2em 0;*/
+	border-left: 1px solid #aaa;
+	border-right: 1px solid #aaa;
+	font-family: "Century Gothic", Verdana, sans-serif;
+	background: #fff;
+}
+#content{clear: both; min-height: 30em; background: #fff url(/images/contentbg.png) top center no-repeat;}
+form{margin: 1em 0; background: #eee; padding: 1em}
+fieldset{padding: 1em;}
+#nav_main{  list-style-type: none; text-align: center; width: 100%; margin: 0 auto;}
+#nav_main li{display: block; float: left; width: 25%; border-bottom: 1px solid #490505;}
+.submit{padding: 1em 0; margin: 1em 0; clear: both;}
+.submit input{padding: 0.2em 2em; background: transparent; }
+input{background: #fff; border: 1px solid #aaa; padding: 0.2em;}
+label{width: 50%; float: left;}
+label span{display: block; float: left;}
+label input,label select{float: left;}
+
+#nav_main li a{background: #bbb; display: block; border-top: 1px solid #aaa;border-bottom: 1px solid #aaa; padding: 0.3em 0; text-decoration: none; color: #333;}
+#nav_main li a:hover{background: #fff;}
+#site_info{ text-align: center; padding: 2em 0;}
+#content_main{ width: 870px;  clear: both; margin: 0 auto; padding-top: 1em;}
+#availibilityListing{width: 100%; border: 1px solid #aaa; border-collapse:collapse;}
+th,td{border: 1px solid #aaa; padding: 0.2em;}
+table.ratelist{width: 100%; border-collapse: collapse;}
+table.ratelist tbody tr.odd td{background: #eee;}
+table.ratelist tbody tr.even td{background: #fff;}
+#availibilityListing thead th,#availibilityListing tfoot td{ background: #bbb;}
+#availibilityListing tfoot{ text-align: center; font-weight: bold;}
+#availibilityListing tr.even td{ background: #fff;}
+#availibilityListing tbody tr:hover td{ background: #ddd;}
+#banner{background:#990B0B; padding-top: 2em;}
+#banner h1{color: #fff; margin-left: 30%; line-height: 200%;}
+caption{padding: 0 0 1em 0;}
+.accessibility{text-indent: -999em; height: 0; margin: 0;}
+.subform{border: 1px solid #aaa; padding: 1em; margin: 1em 0;} 
+.formgroupings{clear: both;} 
+#date_range_from,#date_range_to{position: relative;}
+#fromDateCal,#toDateCal{  width: 25px; height: 20px;  background: transparent url(/images/calendar_view_month.png) center center no-repeat; cursor: pointer; float: left;}
+#fromDateCalContainer { display:none; position:absolute; left:200px; top:-150px; z-index:1} 
+#toDateCalContainer { display:none; position:absolute; left:200px; top:-150px; z-index:2} 
+   }
+   

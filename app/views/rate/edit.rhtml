@@ -1,0 +1,9 @@
+<h1>Editing Rate</h1>
+
+<% form_tag :action => 'update', :id => @another_model do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @another_model %> |
+<%= link_to 'Back', :action => 'rate' %>
